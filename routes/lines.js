@@ -27,4 +27,16 @@ router.post('/', async (req, res) => {
   return res.status(201).json(newRoute);
 });
 
+router.route('/:id').delete((req, res, next) => {
+  lineRoutes.findByIdAndRemove(req.params.id, (error, data) => {
+    if (error) {
+      return next(error);
+    } else {
+      res.status(200).json({
+        msg: data
+      })
+    }
+  })
+})
+
 module.exports = router;
